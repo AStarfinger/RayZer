@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="RayZer: A Self-supervised Large View Synthesis Model">
+  <meta property="og:title" content="RayZer"/>
+  <meta property="og:description" content="RayZer"/>
+  <meta property="og:url" content="https://hwjiang1510.github.io/RayZer"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/logo3.png" />
+  <meta property="og:image:width" content="600"/>
+  <meta property="og:image:height" content="600"/>
+
+
+  <meta name="twitter:title" content="RayZer">
+  <meta name="twitter:description" content="A Self-supervised Large View Synthesis Model">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/image/logo3.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="self-supervised, 3D model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>RayZer</title>
+  <link rel="icon" type="image/x-icon" href="static/image/logo3.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- <h1 class="title is-1 publication-title" style="margin-bottom:0rem">RayZer</h1> -->
+            <h1 class="title is-1 publication-title" style="margin-bottom:0rem">
+              <img src="static/image/logo3.png" alt="Icon" style="height:1.7em; vertical-align:middle; margin-right:0.05em;">
+              RayZer
+            </h1>
+            <h3 class="title is-2 publication-title">A Self-supervised Large View Synthesis Model</h3>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://hwjiang1510.github.io/" target="_blank">Hanwen Jiang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.cs.unc.edu/~airsplay/" target="_blank">Hao Tan</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                      <a href="https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c" target="_blank">Peng Wang</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                      <a href="https://haian-jin.github.io/" target="_blank">Haian Jin</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://zhaoyue-zephyrus.github.io/" target="_blank">Yue Zhao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://sai-bi.github.io/" target="_blank">Sai Bi</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                      <a href="https://kai-46.github.io/website/" target="_blank">Kai Zhang</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://luanfujun.com/" target="_blank">Fujun Luan</a><sup>2</sup>,
+              </span>
+              <br>
+              <span class="author-block">
+                <a href="http://www.kalyans.org/" target="_blank">Kalyan Sunkavalli</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                      <a href="https://www.cs.utexas.edu/~huangqx/index.html" target="_blank">Qixing Huang</a><sup>1</sup>,
+              </span>
+                    <span class="author-block">
+                      <a href="https://geopavlakos.github.io/" target="_blank">Georgios Pavlakos</a><sup>1</sup>
+              </span>
+              
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>1</sup>UT Austin</span>,
+              <span class="author-block"><sup>2</sup>Adobe Research</span>,
+              <span class="author-block"><sup>3</sup>Cornell University</span>
+            </div>
+            <br>
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2412.14166" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/hwjiang1510/RayZer" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+			  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay muted loop height="100%">
+        <source src="./static/video/demo_compressed.mp4"
+        type="video/mp4">
+      </video> 
+      <br>
+      <div class="notification is-centered is-info is-rounded" style="text-align: center; padding-bottom: 5px; padding-top: 5px; background-color: #80C4E9;">
+        <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: RayZer shows that 3D self-supervised learning can <b>beat</b> supervised learning.</h6>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Self-supervised Learning Framework</h2>
+        <div class="content has-text-justified">
+		  <div class="box m-5">
+              <!-- <video width="100%" controls>
+                <source src="resources/framework.mp4" type="video/mp4">
+              </video> -->
+              <video poster="" id="tree" autoplay muted loop height="100%">
+                <!-- Your video here -->
+                <source src="./static/video/framework_compressed.mp4"
+                type="video/mp4">
+              </video>
+            </div>
+          <p>
+            Morden self-supervised methods share the same principle of learning by <b>predicting "missing" data</b>. For example, GPT predicts missing next token leveraging language sequential prior; MAE predicts missing (masked) visual tokens leveraging 2D spatial structure.
+            Can we make analogy to build self-supervised 3D model? What will be the "missing" data then?
+            <br>
+            Our answer is predicting <b>"missing" views</b> from observed views.
+            <br>
+            During training, the input of RayZer is unlabeled (unposed & uncalibrated) multi-view images. RayZer splits the images into <b>two sets</b> --  \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \) and \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \).
+            RayZer predicts the \( \textcolor{#47D45A}{\text{scene representation}} \) from \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \), and use predicted \( \textcolor{#E97132}{\text{cameras}} \) of \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \) to render the \( \textcolor{#47D45A}{\text{scene}} \), getting predictions \( \mathcal{\hat{I}}_\textcolor{#E97132}{\mathcal{B}} \).
+            Thus, RayZer is trained with only photometric loss between \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \) and \( \mathcal{\hat{I}}_\textcolor{#E97132}{\mathcal{B}} \), <b>requiring zero 3D supervision</b> of camera and geometry.
+            This split of \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \) and \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \) helps us <b>disentangle</b> scene and camera representations.
+            <br>
+            To make cameras and scene register with each other, we predict cameras of all views (both \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \) and \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \)) jointly, and use predicted \( \textcolor{#47D45A}{\text{cameras}} \) of \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \) to condition the \( \textcolor{#47D45A}{\text{scene}} \) prediction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">RayZer Model</h2>
+        <hr>
+        <div class="content has-text-justified">          
+            <div class="box m-5">
+            <div class="content has-text-centered">
+              <img src="static/image/model.png" width="100%" alt="model" />
+            </div>
+            </div>
+            <p>
+              To facilitate self-supervised learning, RayZer model is built with <b>minimal 3D inductive bias</b>, motivated by self-supervised large models in other modalities.  RayZer's three main components, including camera estimator, scene reconstructor, and renderer, are plain <b> Transformers with self-attention </b>. The only 3D prior incorporated is the <b>ray structure</b>, which simultaneously models the relationship between camera, pixels (image), and scene.
+              (<b>Left</b>) RayZer first estimates camera parameters, where the middle view is selected as the canonical reference view (in \( \textcolor{#44B3E1}{blue} \) box). 
+              RayZer predicts the intrinsics and the relative camera poses \( \mathcal{P} \) of all views. The camera poses are in <b>low-dimensional</b> \( SE(3) \), helping disentangling cameras and scene. 
+              The predicted cameras are then converted into pixel-aligned Plücker ray maps \( \mathcal{R} \). 
+              (<b>Middle</b>) RayZer uses the subset of input images, \( \mathcal{I}_\textcolor{#47D45A}{\mathcal{A}} \), as well as their previously predicted camera Plücker ray maps, \( \mathcal{R}_\textcolor{#47D45A}{\mathcal{A}} \), to predict a latent \( \textcolor{#47D45A}{\text{scene}} \) representation. 
+              Here, the Plücker ray maps, \( \mathcal{R}_\textcolor{#47D45A}{\mathcal{A}} \), serve as an effective condition for scene reconstruction by providing <b>fine-grained</b> ray-level information.
+              (<b>Right</b>) RayZer render a target image given the scene representation \( \mathbf{z}^{*} \) and a target camera. 
+              During training, we use \( \mathcal{R}_\textcolor{#E97132}{\mathcal{B}} \), which is the previously predicted cameras Plücker ray maps of \( \mathcal{I}_\textcolor{#E97132}{\mathcal{B}} \), to render \( \hat{\mathcal{I}}_\textcolor{#E97132}{\mathcal{B}} \). 
+              This allows training RayZer end-to-end with self-supervised photometric losses.
+              </p>  
+        </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths"> 
+        <h2 class="title is-3">Comparison with 3D Supervised Counterparts</h2>
+        <hr>
+        <div class="content has-text-justified">
+            <p>
+				      <b>Experiment setting</b>: We compare with two 3D supervised methods, GS-LRM and LVSM. They are trained with 3D camera annotations and uses labeled cameras during testing.  RayZer share similar reconstruction and rendering modules with LVSM.
+              <br>
+              We compare with baselines on DL3DV, RealEstate, and Objaverse. Note that DL3DV and RealEstate are <b>annotated by COLMAP</b>. 
+			      </p>
+        </div>
+        <hr>
+        <h2 class="title is-4">Quantitative Comparison of Novel View Synthesis</h2>
+        <div class="content has-text-justified">
+            <p>
+              
+            </p>
+        </div>
+            <div class="box m-5">
+                <div class="content has-text-centered">
+                    <img src="static/image/psnr.png" width="100%" alt="psnr" />
+                </div>
+            </div>
+            <div class="content has-text-justified" style="margin-bottom: 3rem;">
+              <p>
+                <b>RayZer (self-supervised) shows better novel view synthesis performance</b> on DL3DV and RealEstate. This result not only shows the strong capability of RayZer, but also implies COLMAP annotation is not perfect. <b>Supervised learning with COLMAP IS NOT ALWAYS THE BEST OPTION!</b>
+              </p>
+          </div>
+			  <hr>
+        <h2 class="title is-4">Qualiative Comparison of Novel View Synthesis</h2>
+          <div class="content has-text-centered" style="margin-bottom: 0.3rem;">
+            <img src="static/image/vis.png" width="100%" alt="vis" />
+          </div>
+          <div class="content has-text-justified" style="margin-bottom: 3rem;">
+            <p>
+              We find that GS-LRM and LVSM <b>consistently fail</b> on some cases during inference. Interestingly, these cases are the scenarios that COLMAP usually fails.
+              For example, the glasses in the first row, the high luminance intensity and the white walls in the second row. The result again verifies the limitation of supervised learning with COLMAP annotations and highlights the importance of self-supervised learning.
+            </p>
+          </div>
+          <hr>
+          <h2 class="title is-4">Comparison of Camera Poses</h2>
+          <div class="content has-text-centered">
+            <img src="static/image/pose.png" width="100%" alt="vis" />
+          </div>
+          <div class="content has-text-justified">
+            <p>
+             (<b>Left</b>) We visualize RayZer predicted camera poses learned with self-supervision. We also visualize 3 out of 5 rendered views. The predicted poses correctly capture the camera motion patterns.
+             (<b>Right</b>) At the same time, we find the learned pose space <b>do not exactly match the real-world pose space</b>. As RayZer is built with latent 3D representation, the learned pose space can be compatible with learned scene representation, but is not gauranteed to be geometrically correct.
+             To understand the learned pose space, we probe it by train an prediction MLP using supervised learning (with <b>frozen Camera Encoder initialized by self-supervised pre-training</b>). We also compare with a supervised baseline where both Camera Encoder and prediction MLP are trained from scratch.
+             The result shows that RayZer's learned pose space is meaningful, and <b>RayZer self-supervised novel view synthesis pre-training is more effective than supervised training of pose</b>.
+            </p>
+          </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">More Results</h2>
+        <hr>
+        <div class="content">
+          <p class="has-text-centered">
+            We include more novel view synthesis results of RayZer.
+          </p>
+          <div class="box m-5">
+            <video width="100%" controls autoplay muted playsinline>
+              <source src="static/video/RayZer_supp_video_compressed.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>        
+    </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+		@article{jiang2025rayzer,
+		   title={RayZer: A Self-supervised Large View Synthesis Model},
+		   author={Jiang, Hanwen and Tan, Hao and Wang, Peng and Jin, Haian and Zhao, Yue and Bi, Sai and Zhang, Kai and Luan, Fujun and Sunkavalli, Kalyan and Huang, Qixing and Pavlakos, Georgios and Tan, Hao},
+		   booktitle={arXiv preprint arXiv:},
+		   year={2025},
+		}
+	  </code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
