@@ -8,7 +8,6 @@ from torch.utils.data import DataLoader, DistributedSampler
 import torch.distributed as dist
 from setup import init_config, init_distributed
 from utils.metric_utils import export_results, summarize_evaluation
-from utils.camera_export import export_cameras_with_images
 
 # Load config and read(override) arguments from CLI
 config = init_config()
@@ -109,44 +108,26 @@ with torch.no_grad(), torch.autocast(
             # Export predicted cameras if enabled in config
             if config.inference.get("export_cameras", False) and ddp_info.is_main_process:
 
-                cameras_export_dir = os.path.join(inference_out_dir, "camera_export")
-                os.makedirs(cameras_export_dir, exist_ok=True)
+                cameras_dir = os.path.join(inference_out_dir, "cameras")
+                os.makedirs(cameras_dir, exist_ok=True)
                 
                 # Get image dimensions from config or batch
                 image_height = config.model.target_image.height
                 image_width = config.model.target_image.width
                 
-                # Export cameras with images for this batch
+                # Export cameras for this batch
                 try:
-                    print(f"[EXPORT] Exporting all cameras with images for batch {batch_idx}...", flush=True)
-                    
-                    # Get both input and rendered images
-                    input_images = result.get('input').image if 'input' in result else None
-                    rendered_images = result.get('render', None)
-                    
-                    if input_images is None:
-                        raise ValueError("No input images found in results to export")
-                    if rendered_images is None:
-                        raise ValueError("No rendered images found in results to export")
-                    
-                    # Get input and target indices to know which cameras have which images
-                    input_idx = result.get('input_idx', None)
-                    target_idx = result.get('target_idx', None)
-                    
-                    export_cameras_with_images(
+                    print(f"Exporting cameras for batch {batch_idx}...")
+                    export_cameras_to_json(
                         result['c2w'],
                         result['fxfycxcy'],
-                        input_images=input_images,
-                        rendered_images=rendered_images,
-                        output_dir=cameras_export_dir,
+                        os.path.join(cameras_dir, f"cameras_batch_{batch_idx}.json"),
                         image_height=image_height,
-                        image_width=image_width,
-                        input_idx=input_idx,
-                        target_idx=target_idx
+                        image_width=image_width
                     )
-                    print(f"[EXPORT] Successfully exported all cameras with images to {cameras_export_dir}", flush=True)
+                    print(f"Successfully exported cameras for batch {batch_idx}")
                 except Exception as e:
-                    print(f"[EXPORT ERROR] Failed to export cameras: {type(e).__name__}: {e}", flush=True)
+                    print(f"Warning: Failed to export cameras for batch {batch_idx}: {type(e).__name__}: {e}")
                     import traceback
                     traceback.print_exc()
         

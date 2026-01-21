@@ -510,8 +510,8 @@ class RayZer(nn.Module):
                 if ablation_target_idx < target_idx.shape[1]:
                     global_img_pos = target_idx[batch_idx, ablation_target_idx].item()  # position in full image set
                     # Now find all occurrences of this position in img_indices for this batch
-                    # img_indices shape after reshape: [b*v*n], values repeat according to positions
-                    # Each image at position i appears n times (once per token), so we replace those n entries
+                    # img_indices has shape [b*v*n], we need to find indices for batch_idx and global_img_pos
+                    # The indices are laid out as [batch_0_view_0_tokens, batch_0_view_1_tokens, ..., batch_1_view_0_tokens, ...
                     start_idx = batch_idx * v * n + global_img_pos * n
                     end_idx = start_idx + n
                     img_indices[start_idx:end_idx] = ablation_temporal_idx
